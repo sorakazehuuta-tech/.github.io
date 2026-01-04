@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Personal Works | VRChat Style</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- VRChat Style Variables --- */
+        :root {
+            --vrc-bg: #060a10;       /* 背景色 */
+            --vrc-panel: #121b22;    /* カード背景 */
+            --vrc-border: #1e2d36;   /* 枠線 */
+            --vrc-accent: #2bcfed;   /* アクセントカラー(シアン) */
+            --vrc-text: #ffffff;
+            --vrc-sub: #8696a0;
+            --radius: 12px;
+            --font-main: 'Roboto', 'Noto Sans JP', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--vrc-bg);
+            color: var(--vrc-text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+
+        /* コンテナ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            position: relative;
+        }
+
+        /* --- バナーエリア --- */
+        .banner-wrap {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #102430, #004d61);
+            position: relative;
+        }
+
+        /* 戻るボタン */
+        .back-btn {
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            width: 44px; height: 44px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            z-index: 100;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            background: var(--vrc-accent);
+            border-color: var(--vrc-accent);
+            color: #000;
+        }
+
+        /* --- プロフィールヘッダー --- */
+        .profile-header {
+            display: flex;
+            align-items: flex-end;
+            margin-top: -80px;
+            padding: 0 10px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .user-icon {
+            width: 130px; height: 130px;
+            background: #222;
+            border: 5px solid var(--vrc-bg);
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .user-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+        .user-info {
+            margin-left: 25px;
+            padding-bottom: 15px;
+        }
+
+        .user-status {
+            font-size: 0.9rem;
+            color: var(--vrc-accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 5px;
+        }
+
+        .user-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.1;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+        }
+        
+        /* --- セクション見出し --- */
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 50px 0 25px;
+            padding-left: 15px;
+            border-left: 5px solid var(--vrc-accent);
+            color: #fff;
+        }
+
+        /* --- グリッド --- */
+        .vrc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* カードデザイン */
+        .vrc-card {
+            background-color: var(--vrc-panel);
+            border: 1px solid var(--vrc-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .vrc-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--vrc-accent);
+            box-shadow: 0 0 20px rgba(43, 207, 237, 0.2);
+        }
+
+        .card-thumb {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            position: relative;
+        }
+        .card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+        .card-body {
+            padding: 18px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0 0 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #ddd;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        /* ボタン */
+        .btn-launch {
+            display: block;
+            text-align: center;
+            background: transparent;
+            border: 1px solid var(--vrc-accent);
+            color: var(--vrc-accent);
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .btn-launch:hover {
+            background: var(--vrc-accent);
+            color: #060a10;
+        }
+
+        /* モバイル対応 */
+        @media (max-width: 600px) {
+            .profile-header { flex-direction: column; align-items: center; text-align: center; margin-top: -60px; }
+            .user-info { margin-left: 0; margin-top: 15px; }
+            .back-btn { left: 20px; top: 20px; }
+            .vrc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner-wrap">
+        <div class="container" style="height: 100%;">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="profile-header">
+            <div class="user-icon">
+                <img src="my-icon.jpg" alt="User Icon">
+            </div>
+            <div class="user-info">
+                <div class="user-status">Personal Works</div>
+                <h1 class="user-name">Hobbies & Research</h1>
+            </div>
+        </div>
+
+        <h2 class="section-title">VRChat Worlds</h2>
+        <div class="vrc-grid">
+
+            <article class="vrc-card">
+                <div class="card-thumb">
+                    <img src="world1.jpg" alt="World Thumbnail">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">RoikoHouseUdon</h3>
+                    <p class="card-desc">
+                        RoikoHouse(VRChat)
+                        VRの世界ではあなたはどこにだって行けるし、どんな姿にもなれる。このワールドは寄生されたカタツムリに暮らす少女たちのおうちです。
+                    </p>
+                    <a href="https://vrch.at/h8pf3rd0" target="_blank" class="btn-launch">
+                        World Details <i class="fa-solid fa-up-right-from-square" style="font-size:0.8em; margin-left:5px;"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="vrc-card">
+                <div class="card-thumb">
+                    <img src="world2.jpg" alt="World Thumbnail">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Particle Live Demo</h3>
+                    <p class="card-desc">
+                        ネオンサインのサンプルWorldです。
+                    </p>
+                    <a href="https://vrch.at/qmwv38sn" target="_blank" class="btn-launch">
+                        World Details <i class="fa-solid fa-up-right-from-square" style="font-size:0.8em; margin-left:5px;"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article class="vrc-card">
+                <div class="card-thumb">
+                    <img src="world3.jpg" alt="World Thumbnail">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">RoikoHouseUdon</h3>
+                    <p class="card-desc">
+                    ドライヤーのサンプルWorldです。
+                    </p>
+                    <a href="https://vrch.at/ck2k7wtm" target="_blank" class="btn-launch">
+                        World Details <i class="fa-solid fa-up-right-from-square" style="font-size:0.8em; margin-left:5px;"></i>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+
+        <h2 class="section-title">Research & Others</h2>
+        <div class="vrc-grid">
+            
+            <article class="vrc-card">
+                <div class="card-thumb">
+                    <img src="other1.jpg" alt="Research Thumbnail">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">VR Ring Shooting</h3>
+                    <p class="card-desc">
+                        リングフィットコントローラーを使用したVRシューティングゲームです。心拍センサで弾の強弱が変わります。体験希望の方は連絡ください。
+                    </p>
+                </div>
+            </article>
+
+            <article class="vrc-card">
+                <div class="card-thumb">
+                    <img src="other2.jpg" alt="App Thumbnail">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Pain Control Visual Simulator</h3>
+                    <p class="card-desc">
+                        VRを使用して注射の痛みを軽減させる研究です。痛みの対象物をVRでほかのオブジェクトに差し替え、痛みの軽減を調べます。
+                    </p>
+                </div>
+            </article>
+
+
+                        <article class="vrc-card">
+                <div class="card-thumb">
+                    <img src="other3.jpg" alt="App Thumbnail">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">3DPrint RoikoHouse</h3>
+                    <p class="card-desc">
+                        光造形の3Dプリンターで自作モデルを印刷し、塗装しました。
+                    </p>
+                </div>
+            </article>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Asset Store | My Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Clean Store Style --- */
+        :root {
+            --bg-body: #F5F5F7;
+            --bg-card: #FFFFFF;
+            --text-main: #333333;
+            --text-sub: #666666;
+            --accent: #fc4d50; /* BOOTHっぽい赤 */
+            --radius: 16px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --font-main: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.2s; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- ヘッダー --- */
+        header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        
+        /* 戻るボタン */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            color: var(--text-main);
+            margin-right: 20px;
+            font-size: 1.1rem;
+        }
+        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        /* --- ストアグリッド --- */
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* 商品カード */
+        .product-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        /* 画像サムネイルエリア（強力固定版） */
+        .product-thumb {
+            width: 100%;
+            /* 1 / 1 で正方形。ここを変えれば比率が変わります */
+            aspect-ratio: 1 / 1; 
+            background: #eee;
+            position: relative;
+            overflow: hidden; /* 枠からはみ出た部分を非表示にする */
+        }
+        
+        .product-thumb img { 
+            position: absolute; /* 画像を強制的に枠に合わせる */
+            top: 0;
+            left: 0;
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; /* 枠いっぱいに隙間なく表示（はみ出しはカット） */
+            object-position: top center; /* 人物などは「上寄り」に表示した方が顔が切れにくい */
+        }
+
+        /* 価格バッジ */
+        .price-tag {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            backdrop-filter: blur(4px);
+            z-index: 2;
+        }
+        .price-free {
+            background: var(--accent);
+        }
+
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category {
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0 0 10px;
+            line-height: 1.3;
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* ストアへ行くボタン */
+        .btn-store {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            background: #333;
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .btn-store:hover { background: #000; }
+        
+        /* BOOTH用カラー */
+        .booth { background: #fc4d50; }
+        .booth:hover { background: #d93538; }
+
+        /* モバイル対応 */
+        @media (max-width: 600px) {
+            .store-grid { grid-template-columns: 1fr; }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-sub);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <h1 class="page-title">Asset Store</h1>
+        </header>
+
+        <div class="store-grid">
+
+            <article class="product-card">
+                <div class="product-thumb">
+                    <img src="asset1.jpg" alt="Asset Image">
+                    <span class="price-tag">¥500</span>
+                </div>
+                <div class="product-info">
+                    <span class="category">3D Model / Gimmick</span>
+                    <h2 class="product-title">【VRChatワールドギミック】PB対応ドライヤー</h2>
+                    <p class="product-desc">
+                        【ドライヤーギミック】<br>
+                        PickUpしてTriggerを押すと風が出ます。
+                        もう一度Triggerを押すと停止します。
+                    </p>
+                    
+                    <a href="https://kuanvrchat.booth.pm/items/7746997" target="_blank" class="btn-store booth">
+                        <i class="fa-solid fa-shop"></i> BOOTHで見る
+                    </a>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <div class="product-thumb">
+                    <img src="asset2.jpg" alt="Asset Image">
+                    <span class="price-tag">¥500</span>
+                </div>
+                <div class="product-info">
+                    <span class="category">3D Model</span>
+                    <h2 class="product-title">Neon bulletin board Chinese characters</h2>
+                    <p class="product-desc">
+                        漢字を使ったネオン掲示板です。<br>
+                        ・鬱・福・珈琲・酒・煙草
+                    </p>
+                    <a href="https://kuanvrchat.booth.pm/items/2345058" target="_blank" class="btn-store booth">
+                        <i class="fa-solid fa-shop"></i> BOOTHで見る
+                    </a>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <div class="product-thumb">
+                    <img src="asset3.jpg" alt="Asset Image">
+                    <span class="price-tag">¥500</span>
+                </div>
+                <div class="product-info">
+                    <span class="category">3D Model</span>
+                    <h2 class="product-title">Neon bulletin board Chinese characters 2</h2>
+                    <p class="product-desc">
+                        漢字を使ったネオン掲示板です。<br>
+                        ・金・暴力・性交・丑年・薯蕷
+                    </p>
+                    <a href="https://kuanvrchat.booth.pm/items/2637407" target="_blank" class="btn-store booth">
+                        <i class="fa-solid fa-shop"></i> BOOTHで見る
+                    </a>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <div class="product-thumb">
+                    <img src="asset4.jpg" alt="Asset Image">
+                    <span class="price-tag">¥500</span>
+                </div>
+                <div class="product-info">
+                    <span class="category">3D Model</span>
+                    <h2 class="product-title">Neon bulletin board Chinese characters 3</h2>
+                    <p class="product-desc">
+                        漢字を使ったネオン掲示板です。<br>
+                        ・桜・草・宴・餅・寅
+                    </p>
+                    <a href="https://kuanvrchat.booth.pm/items/3563326" target="_blank" class="btn-store booth">
+                        <i class="fa-solid fa-shop"></i> BOOTHで見る
+                    </a>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <div class="product-thumb">
+                    <img src="asset5.jpg" alt="Asset Image">
+                    <span class="price-tag price-free">Free</span>
+                </div>
+                <div class="product-info">
+                    <span class="category">3D Model</span>
+                    <h2 class="product-title">Photo frame(free)</h2>
+                    <p class="product-desc">
+                        VRChatで撮った写真を飾る用のフォトフレームです。
+                    </p>
+                    <a href="https://kuanvrchat.booth.pm/items/2155553" target="_blank" class="btn-store booth">
+                        <i class="fa-solid fa-shop"></i> BOOTHで見る
+                    </a>
+                </div>
+            </article>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

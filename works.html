@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Client Works | My Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- デザイン設定 (共通) --- */
+        :root {
+            --bg-body: #F5F5F7;
+            --bg-card: #FFFFFF;
+            --text-main: #1D1D1F;
+            --text-sub: #86868B;
+            --accent: #0071E3;
+            --radius: 24px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --font-main: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- ヘッダー --- */
+        header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        /* 戻るボタン */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            color: var(--text-main);
+            margin-right: 20px;
+            font-size: 1.1rem;
+        }
+        .back-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateX(-3px);
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+        .page-title span { color: var(--accent); }
+
+        /* --- 作品リスト --- */
+        .works-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .work-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .work-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        /* 画像エリア */
+        .work-img-area {
+            width: 100%;
+            height: 320px; /* 少し高さを増やしてリッチに */
+            background: #eee;
+            position: relative;
+            overflow: hidden;
+        }
+        .work-img-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .work-card:hover .work-img-area img { transform: scale(1.03); }
+
+        /* テキストエリア */
+        .work-content { padding: 40px; } /* パディングを少し広げました */
+
+        .work-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .work-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+        
+        .work-year {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            font-weight: 600;
+            background: #f0f0f5;
+            padding: 4px 10px;
+            border-radius: 8px;
+            white-space: nowrap;
+            margin-left: 20px;
+        }
+
+        .work-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .tag {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            background: rgba(0, 113, 227, 0.08);
+            padding: 5px 12px;
+            border-radius: 100px; /* より丸くしてモダンに */
+        }
+
+        .work-desc {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.8; /* 行間を広げて読みやすく */
+            margin: 0; /* 下の余白を削除（パディングに任せる） */
+        }
+
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+            .work-img-area { height: 220px; }
+            .work-content { padding: 25px; }
+            .work-header { flex-direction: column; }
+            .work-year { margin: 8px 0 0 0; }
+            .work-title { font-size: 1.4rem; }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-sub);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <h1 class="page-title">Client <span>Works</span></h1>
+        </header>
+
+        <div class="works-list">
+
+            <article class="work-card">
+                <div class="work-img-area">
+                    <img src="2025work.jpg" alt="Project Image">
+                </div>
+                <div class="work-content">
+                    <div class="work-header">
+                        <h2 class="work-title">Figaro Fan Worldギミック制作</h2>
+                        <span class="work-year">2025</span>
+                    </div>
+                    <div class="work-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">VRChat</span>
+                    </div>
+                    <p class="work-desc">
+                    </p>VRChatのワールド制作依頼でワールド&アバターギミックの制作を担当しました。
+                </div>
+            </article>
+
+            <article class="work-card">
+                <div class="work-img-area">
+                    <img src="2025work2.jpg" alt="Project Image">
+                </div>
+                <div class="work-content">
+                    <div class="work-header">
+                        <h2 class="work-title">多感覚ICTを用いたフレイル予防・回復支援システムの研究開発</h2>
+                        <span class="work-year">2025</span>
+                    </div>
+                    <div class="work-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">研究・調査</span>
+                        <span class="tag">VRChat</span>
+                    </div>
+                    <p class="work-desc">
+                        知の拠点あいちの研究プロジェクトでソフトウェア開発の業務委託を受けました。
+                    </p>
+                </div>
+            </article>
+
+
+             <article class="work-card">
+                <div class="work-img-area">
+                    <img src="202407work.jpg" alt="Project Image">
+                </div>
+                <div class="work-content">
+                    <div class="work-header">
+                        <h2 class="work-title">Doorワールド制作</h2>
+                        <span class="work-year">2024</span>
+                    </div>
+                    <div class="work-tags">
+                        <span class="tag">DOOR</span>
+                        <span class="tag">3D Model</span>
+                        <span class="tag">Blender</span>
+                    </div>
+                    <p class="work-desc">
+                        Doorでワールド制作の依頼で3Dモデル制作を担当しました。
+                    </p>
+                </div>
+            </article>
+            <article class="work-card">
+                <div class="work-img-area">
+                    <img src="202212work.jpg" alt="Project Image">
+                </div>
+                <div class="work-content">
+                    <div class="work-header">
+                        <h2 class="work-title">Vket2022 Winter:アコム株式会社</h2>
+                        <span class="work-year">2022</span>
+                    </div>
+                    <div class="work-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">VRChat</span>
+                        <span class="tag">3D Model</span>
+                        <span class="tag">Blender</span>
+                    </div>
+                    <p class="work-desc">
+                        株式会社HIKKYの業務委託でアコム株式会社のブースの3Dモデル制作を担当しました。
+                </div>
+            </article>
+
+
+            <article class="work-card">
+                <div class="work-img-area">
+                    <img src="202207work.jpg" alt="Project Image">
+                </div>
+                <div class="work-content">
+                    <div class="work-header">
+                        <h2 class="work-title">Vket2022 Summer:アルパインマーケティング株式会社</h2>
+                        <span class="work-year">2022</span>
+                    </div>
+                    <div class="work-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">VRChat</span>
+                        <span class="tag">3D Model</span>
+                        <span class="tag">Blender</span>
+                    </div>
+                    <p class="work-desc">
+                        株式会社HIKKYからの業務委託でアルパインブースの3Dモデルを担当しました。
+                    </p>
+                </div>
+            </article>
+
+            <article class="work-card">
+                <div class="work-img-area">
+                    <img src="202112work.jpg" alt="Project Image">
+                </div>
+                <div class="work-content">
+                    <div class="work-header">
+                        <h2 class="work-title">バーチャルHAWKS STORE(内観)</h2>
+                        <span class="work-year">2021</span>
+                    </div>
+                    <div class="work-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">VRChat</span>
+                        <span class="tag">3D Model</span>
+                        <span class="tag">Blender</span>
+                    </div>
+                    <p class="work-desc">
+                        バーチャルHAWKS STOREの内観を担当しました。
+                        ホークスストアのグッズや選手のユニフォームが展示してあります。
+                        ハリーホークや選手たちと一緒に写真を撮ることもできます。
+                        内観の3Dモデルに加えてUnityでライティング等の設定を行いました。
+                    </p>
+                </div>
+            </article>
+
+            <article class="work-card">
+                <div class="work-img-area">
+                    <img src="2021vket51work.jpg" alt="Project Image">
+                </div>
+                <div class="work-content">
+                    <div class="work-header">
+                        <h2 class="work-title">ミッキー しめ飾り だるま Eto Disney 2021</h2>
+                        <span class="work-year">2021</span>
+                    </div>
+                    <div class="work-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">VRChat</span>
+                        <span class="tag">3D Model</span>
+                        <span class="tag">Blender</span>
+                    </div>
+                    <p class="work-desc">
+                        Virtual Market5に企業出展したDisney storeのグッズ制作を担当しました。
+                        制作方法としては三面図の写真をからBlenderを用いて3Dモデルを製作しました。そこからSubstancepainterを使用してテクスチャを制作し、Unityで統合しました。
+                    </p>
+                </div>
+            </article>
+
+                        <article class="work-card">
+                <div class="work-img-area">
+                    <img src="2021vket52work.jpg" alt="Project Image">
+                </div>
+                <div class="work-content">
+                    <div class="work-header">
+                        <h2 class="work-title">バーチャル大丸松坂屋</h2>
+                        <span class="work-year">2021</span>
+                    </div>
+                    <div class="work-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">VRChat</span>
+                        <span class="tag">3D Model</span>
+                        <span class="tag">Blender</span>
+                    </div>
+                    <p class="work-desc">
+                        Virtual Market5に企業出展した大丸松坂屋ブースの3Dモデルを担当しました。
+制作方法はブースの全体図をデザイナーからいただき、それをもとに3Dモデルを製作しました。食べ物の陳列した商品は先方から写真をいただき、それを3Dモデルに貼り付けて製作しました。
+                    </p>
+                </div>
+            </article>
+
+            
+        </div>
+    </div>
+
+</body>
+</html>
